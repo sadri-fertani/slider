@@ -1,0 +1,52 @@
+<div [style.visibility]="visible ? 'visible' : 'hidden'" style="width: 85%;height: 85%; margin-left: 17px">
+    <div class="row" [class.vertical-sliders]="vertical">
+        <div [class.col-md-2]="vertical">
+            <div #slider class="rzslider" [class.rz-vertical]="vertical">
+                <span #sliderBarWrapper1 class="rz-bar-wrapper">
+                    <span #bar1 class="rz-bar"></span>
+                </span>
+                <!-- // 0 The slider bar -->
+                <span #sliderBarWrapper2 class="rz-bar-wrapper" [ngClass]="{'rz-draggable': isRange && isDragable}"> 
+                    <span #bar2 class="rz-bar" [ngClass]="{'rz-selection': selectionBarVisible}"></span>
+                </span>
+                <!-- // 1 Highlight between two handles -->
+                <span #pointerMin [attr.tabindex]="initIndex()" (click)="clickCursor($event, 'CUR1')" class="rz-pointer rz-pointer-min" [ngClass]="{'rz-active': leftPointeurSelected}"
+                    (focus)="focusMinPointer()" (focusout)="focusoutMinPointer()"></span>
+                <!-- // 2 Left slider handle -->
+                <span #pointerMax [attr.tabindex]="initIndex()" (click)="clickCursor($event, 'CUR2')" class="rz-pointer rz-pointer-max" [ngClass]="{'rz-active': rightPointeurSelected}"
+                    [style.visibility]="isRange ? 'visible' : 'hidden'" (focus)="focusMaxPointer()" (focusout)="focusoutMaxPointer()"></span>
+                <!-- // 3 Right slider handle -->
+                <span #floor class="rz-bubble rz-limit rz-floor">
+                    <ng-container *ngIf="rtl">{{Max}}</ng-container>
+                    <ng-container *ngIf="!rtl">{{Min}}</ng-container>
+                </span>
+                <!-- // 4 Floor label -->
+                <span #ceil class="rz-bubble rz-limit rz-ceil">
+                    <ng-container *ngIf="rtl">{{Min}}</ng-container>
+                    <ng-container *ngIf="!rtl">{{Max}}</ng-container>
+                </span>
+                <!-- // 5 Ceiling label -->
+                <span #currentBubbleMin class="rz-bubble" [style.visibility]="showCurrentValue && visible ? 'visible' : 'hidden'">                    
+                    <ng-container *ngIf="!transcludeLeft">{{Vmin}}</ng-container>
+                    <ng-content select="ei-slider-left"></ng-content>
+                </span>
+                <!-- // 6 Label above left slider handle -->
+                <span #currentBubbleMax class="rz-bubble" [style.visibility]="showCurrentValue && visible && isRange ? 'visible' : 'hidden'">
+                    <ng-container *ngIf="!transcludeRight">{{Vmax}}</ng-container>
+                    <ng-content select="ei-slider-right"></ng-content>
+                </span>
+                <!-- // 7 Label above right slider handle -->
+                <span class="rz-bubble"></span>
+                <!-- // 8 Range label when the slider handles are close ex. 15 - 17 -->
+                <ul *ngIf="showTicks" class="rz-ticks">
+                    <!-- // 9 The ticks -->
+                    <li *ngFor="let t of ticks; let i = index" [ngClass]="{'rz-tick': t.visible}" [ngClass]="{'rz-selected': t.selected}" [style.transform]="t.style"
+                        [style.background-color]="t.backgroundColor">
+                        <span *ngIf="(t.value !=='') && (showTicksValues) && (((i != 0) && (i != ticks?.length - 1)) || stepsArray != null )  && (t.visible)" class="rz-tick-value">{{ t.value }}</span>
+                        <span *ngIf="t.legend" class="rz-tick-legend">{{ t.legend }}</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

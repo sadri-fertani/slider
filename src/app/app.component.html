@@ -1,0 +1,556 @@
+<div class="wrapper">
+  <header>
+    <h1>Angular Slider</h1>
+  </header>
+  <article>
+    <h2>Formulaire (Validation test)</h2>
+
+    <div class="jumbotron">
+      <form [formGroup]="complexForm" novalidate (ngSubmit)="submitForm(complexForm.value)">
+        <div class="form-group">
+          <label>First Name:</label>
+          <input class="form-control" type="text" [ngClass]="{'has-error':!complexForm.controls['firstName'].valid && complexForm.controls['firstName'].touched}"
+            placeholder="Sadri FERTANI" [formControl]="complexForm.controls['firstName']">
+        </div>
+        <div class="form-group">
+          <label>US Note:</label>{{ complexForm.get('currentVal').value | json }}
+          <Br />
+          <ei-slider formControlName="currentVal" [stepsArray]="stepsArray" showTicks="true" showTicksValues="true" showCurrentValue="false"
+            [tickColor]="fnColor">
+          </ei-slider>
+          <!--<p *ngIf="complexForm.controls.currentVal.errors" style="color:red">Error...</p>-->
+        </div>
+        <div class="form-group">
+          <label>Intervale:</label>{{ complexForm.get('currentVal2').value | json }}
+          <Br />
+          <ei-slider Range="true" formControlName="currentVal2" Min="0" Max="10" showTicks="true" showTicksValues="true" showCurrentValue="false"
+            showSelectionBar="true">
+          </ei-slider>
+        </div>
+        <br />
+        <div class="form-group">
+          <button type="submit" class="btn btn-primary" [disabled]="!complexForm.valid">Submit</button>
+        </div>
+      </form>
+    </div>
+  </article>
+
+  <Br />
+  <Hr />
+  <Br />
+
+  <article>
+    <h2>Slider inside table</h2>
+
+    <table style="width:600px; height: 150px" cellspacing="1" cellpadding="1" border="1">
+      <tr>
+        <td width="15%">
+          SF
+        </td>
+        <td width="70%">
+          <article>
+            Current letter : '{{Vmin1}}'
+            <Br /> Model Visible: <input type="checkbox" [(ngModel)]="visible1" />
+            <Br />
+            <ei-slider style="width:90%" [visible]="visible1" [(Vmin)]="Vmin1" [stepsArray]="stepsArray1" showTicks="true" showTicksValues="true"
+              showCurrentValue="false" [tickColor]="fnColor1">
+            </ei-slider>
+          </article>
+        </td>
+        <td width="15%">
+          SF
+        </td>
+      </tr>
+    </table>
+
+    <table style="width:600px; height: 350px" cellspacing="1" cellpadding="1" border="1">
+      <tr>
+        <td width="15%">
+          ZD
+        </td>
+        <td width="70%">
+          <article>
+            Current letter : '{{Vmin1}}'
+            <Br /> Model Visible: <input type="checkbox" [(ngModel)]="visible1" />
+            <Br />
+            <ei-slider vertical="true" [visible]="visible1" [(Vmin)]="Vmin1" [stepsArray]="stepsArray1" showTicks="true" showTicksValues="true"
+              showCurrentValue="false" [tickColor]="fnColor1">
+            </ei-slider>
+          </article>
+        </td>
+        <td width="15%">
+          ZD
+        </td>
+      </tr>
+    </table>
+  </article>
+
+  <Br />
+  <Hr />
+  <Br />
+
+  <article>
+    <h2>Simple slider with content</h2>
+    <Br />
+    <Br />
+    <ei-slider [(Vmin)]="minVal2" Min="0" Max="10" showTicks="true" showTicksValues="false" showSelectionBar="true" showCurrentValue="true">
+      <ei-slider-left>
+        <table>
+          <tbody>
+            <tr>
+              <th style="width: 25px">Valeur</th>
+              <td>&nbsp;&nbsp;<input type="number" [(ngModel)]="minVal2" style="width: 30px;" /></td>
+            </tr>
+            <tr>
+              <th>Opposé</th>
+              <td style="text-align:right;">&nbsp;{{-minVal2}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </ei-slider-left>
+    </ei-slider>
+  </article>
+
+  <Br />
+  <Hr />
+  <Br />
+
+  <article>
+    <h2>Simple slider with content rtl</h2>
+    <Br />
+    <Br />
+    <ei-slider [(Vmin)]="minVal2" Min="0" Max="10" rtl="true" showTicks="true" showTicksValues="false" showSelectionBar="true"
+      showCurrentValue="true">
+      <ei-slider-left>
+        <table>
+          <tbody>
+            <tr>
+              <th style="width: 25px">Valeur</th>
+              <td>&nbsp;&nbsp;<input type="number" [(ngModel)]="minVal2" style="width: 30px;" /></td>
+            </tr>
+            <tr>
+              <th>Opposé</th>
+              <td style="text-align:right;">&nbsp;{{-minVal2}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </ei-slider-left>
+    </ei-slider>
+  </article>
+
+  <Br />
+  <Hr />
+  <Br />
+
+  <article>
+    <h2>Simple vertical slider with content</h2>
+    <Br />
+    <ei-slider [(Vmin)]="minVal2" Min="0" Max="10" vertical="true" showTicks="true" showTicksValues="false" showSelectionBar="true"
+      showCurrentValue="true">
+      <ei-slider-left>
+        <table>
+          <tbody>
+            <tr>
+              <th style="width: 25px">Valeur</th>
+              <td>&nbsp;&nbsp;<input type="number" [(ngModel)]="minVal2" style="width: 30px;" /></td>
+            </tr>
+            <tr>
+              <th>Opposé</th>
+              <td style="text-align:right;">&nbsp;{{-minVal2}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </ei-slider-left>
+    </ei-slider>
+  </article>
+
+  <Br />
+  <Hr />
+  <Br />
+
+  <article>
+    <h2>Simple range with content</h2>
+    <Br />
+    <Br />
+    <Br />
+    <ei-slider Range="true" [(Vmin)]="minVal3" [(Vmax)]="maxVal3" Min="0" Max="10" showTicks="true" showTicksValues="false" showSelectionBar="true"
+      showCurrentValue="true">
+      <ei-slider-left>
+        <table>
+          <tbody>
+            <tr>
+              <th>Valeur</th>
+              <td><input type="number" [(ngModel)]="minVal3" style="width:100px; height:40px" /></td>
+            </tr>
+            <tr>
+              <th>Opposé</th>
+              <td style="text-align:right;">{{-minVal3}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </ei-slider-left>
+      <ei-slider-right>
+        <input type="number" [(ngModel)]="maxVal3" />
+      </ei-slider-right>
+    </ei-slider>
+  </article>
+
+  <Br />
+  <Hr />
+  <Br />
+
+  <article>
+    <h2>Simple vertical range with content</h2>
+    <Br />
+    <Br />
+    <ei-slider Range="true" [(Vmin)]="minVal3" [(Vmax)]="maxVal3" vertical="true" Min="0" Max="10" showTicks="true" showTicksValues="false"
+      showSelectionBar="true" showCurrentValue="true">
+      <ei-slider-left>
+        <table style="height: 100px">
+          <tbody>
+            <tr>
+              <th>Valeur</th>
+              <td><input type="number" [(ngModel)]="minVal3" /></td>
+            </tr>
+            <tr>
+              <th>Opposé</th>
+              <td style="text-align:right;">{{-minVal3}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </ei-slider-left>
+      <ei-slider-right>
+        <input type="number" [(ngModel)]="maxVal3" />
+        <br />
+      </ei-slider-right>
+    </ei-slider>
+  </article>
+
+  <Br />
+  <Hr />
+  <Br />
+
+  <article>
+    <h2>Simple range with content</h2>
+    <Br />
+    <Br />
+    <ei-slider Range="true" [(Vmin)]="minVal3" [(Vmax)]="maxVal3" Min="0" Max="10" showTicks="true" showTicksValues="false" showSelectionBar="true"
+      showCurrentValue="true">
+      <ei-slider-left>
+        <table>
+          <tbody>
+            <tr>
+              <th>Valeur</th>
+              <td><input type="number" [(ngModel)]="minVal3" /></td>
+            </tr>
+            <tr>
+              <th>Opposé</th>
+              <td style="text-align:right;">{{-minVal3}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </ei-slider-left>
+      <ei-slider-right>
+        {{maxVal3}}
+      </ei-slider-right>
+    </ei-slider>
+  </article>
+
+  <Br />
+  <Hr />
+  <Br />
+
+  <article>
+    <h2>Slider with Alphabet</h2>
+    <Br /> Current letter : <input [(ngModel)]="minVal4" />
+    <Br />
+    <Br />
+    <ei-slider [(Vmin)]="minVal4" [stepsArray]="stepsArray4" showTicks="true" showTicksValues="true" showCurrentValue="false"
+      [tickColor]="fnColor4">
+    </ei-slider>
+  </article>
+
+  <Br />
+  <Hr />
+  <Br />
+
+  <article>
+    <h2>Slider RTL with Alphabet</h2>
+    <Br /> Current letter : '{{minVal4}}'
+    <Br />
+    <ei-slider [(Vmin)]="minVal4" [stepsArray]="stepsArray4" showTicks="true" rtl="true" showTicksValues="true" showCurrentValue="false"
+      [tickColor]="fnColor4">
+    </ei-slider>
+  </article>
+
+  <Br />
+  <Hr />
+  <Br />
+
+  <Br />
+  <Hr />
+  <Br />
+
+  <article>
+    <h2>Slider with custom scale</h2>
+    <Br />
+    <ei-slider [(Vmin)]="minVal5" Min="0" [CustomScalePercent]="CustomScale5" Max="100" showTicks="true" Step="10" showCurrentValue="false"
+      showTicksValues="true" showSelectionBar="false" showSelectionBar="true">
+    </ei-slider>
+  </article>
+
+  <Br />
+  <Hr />
+  <Br />
+
+  <article>
+    <h2>Slider rtl with logarithmic scale</h2>
+    <Br />
+    <ei-slider [(Vmin)]="minVal60" Min="1" rtl="true" LogScale="true" Max="10" showTicks="true" showCurrentValue="false" showTicksValues="true"
+      showSelectionBar="false" showSelectionBar="true">
+    </ei-slider>
+  </article>
+
+  <Br />
+  <Hr />
+  <Br />
+
+  <article>
+    <h2>Slider with logarithmic scale</h2>
+    <Br />
+    <ei-slider [(Vmin)]="minVal61" Min="5" LogScale="true" Max="15" showTicks="true" showCurrentValue="false" showTicksValues="true"
+      showSelectionBar="false" showSelectionBar="false">
+    </ei-slider>
+  </article>
+
+  <Br />
+  <Hr />
+  <Br />
+
+  <article>
+    <h2>Slider with floating values</h2>
+    <Br />
+    <ei-slider [(Vmin)]="minVal7" Min="0" Max="1" showTicks="true" Step="0.1" showTicksValues="true" showSelectionBar="false">
+    </ei-slider>
+  </article>
+
+  <Br />
+  <Hr />
+  <Br />
+
+  <article>
+    <h2>Range with minimum range : {{minRange8}}</h2>
+    <Br />
+    <ei-slider Range="true" [(Vmin)]="minVal8" [(Vmax)]="maxVal8" Min="0" Max="20" showTicks="true" showSelectionBar="true" showTicksValues="true"
+      minRange="{{minRange8}}">
+    </ei-slider>
+  </article>
+
+  <Br />
+  <Hr />
+  <Br />
+
+  <article>
+    <h2>Range with maximum range : {{maxRange9}}</h2>
+    <Br />
+    <ei-slider Range="true" [(Vmin)]="minVal9" [(Vmax)]="maxVal9" Min="0" Max="20" showTicks="true" showSelectionBar="true" showTicksValues="true"
+      maxRange="{{maxRange9}}">
+    </ei-slider>
+  </article>
+
+  <Br />
+  <Hr />
+  <Br />
+
+  <article>
+    <h2>Range with range : From {{minRange10}} To {{maxRange10}}</h2>
+    <Br />
+    <ei-slider Range="true" [(Vmin)]="minVal10" [(Vmax)]="maxVal10" Min="0" Max="20" showTicks="true" showSelectionBar="true"
+      showTicksValues="true" minRange="{{minRange10}}" maxRange="{{maxRange10}}">
+    </ei-slider>
+  </article>
+
+  <Br />
+  <Hr />
+  <Br />
+
+  <article>
+    <h2>Slider with ticks at intermediate positions</h2>
+    <Br /> Model 1: <input type="number" [(ngModel)]="minVal11" />
+    <Br />
+    <ei-slider [(Vmin)]="minVal11" Min="0" Max="100" showTicks="true" intermediateTicks="10" Step="1" showTicksValues="true"
+      showCurrentValue="false" showSelectionBar="true">
+    </ei-slider>
+  </article>
+
+  <Br />
+  <Hr />
+  <Br />
+
+  <article>
+    <h2>Slider with legend</h2>
+    <Br />
+    <ei-slider [(Vmin)]="minVal12" Min="-5" Max="5" showTicks="true" showTicksValues="true" showSelectionBar="false" [legendStepsArray]="legendStepsArray12">
+    </ei-slider>
+  </article>
+
+  <Br />
+
+
+  <Br />
+  <Hr />
+  <Br />
+
+
+  <article>
+    <h2>Slider with custom step = {{step131}}</h2>
+    <Br />
+    <ei-slider [(Vmin)]="minVal13" Min="0" Max="15" showTicks="true" showTicksValues="true" showSelectionBar="false" [Step]="step131">
+    </ei-slider>
+  </article>
+
+  <Br />
+  <Hr />
+  <Br />
+
+  <article>
+    <h2>Slider with custom step = {{step132}}</h2>
+    <Br />
+    <ei-slider [(Vmin)]="minVal13" Min="0" Max="15" showTicks="true" showTicksValues="true" showSelectionBar="false" [Step]="step132">
+    </ei-slider>
+  </article>
+
+  <Br />
+  <Hr />
+  <Br />
+
+  <article>
+    <h2>Slider with custom step = {{step133}}</h2>
+    <Br />
+    <ei-slider [(Vmin)]="minVal13" Min="0" Max="15" showTicks="true" showTicksValues="true" showSelectionBar="false" [Step]="step133">
+    </ei-slider>
+  </article>
+
+  <Br />
+  <Hr />
+  <Br />
+
+  <article>
+    <h2>Slider with dynamic tick color</h2>
+    <Br />
+    <ei-slider [(Vmin)]="minVal14" Min="0" Max="10" showTicks="true" showTicksValues="true" showSelectionBar="false" [tickColor]="fnColor14">
+    </ei-slider>
+  </article>
+
+  <Br />
+  <Hr />
+  <Br />
+
+  <article>
+    <h2>Slider with dynamic selection bar color</h2>
+    <Br />
+    <ei-slider [(Vmin)]="minVal15" Min="0" Max="10" showTicks="true" showTicksValues="true" showSelectionBar="true" [selectionBarColor]="fnColor15">
+    </ei-slider>
+  </article>
+
+  <Br />
+  <Hr />
+  <Br />
+
+  <article>
+    <h2>Range with dynamic selection bar color</h2>
+    <Br />
+    <ei-slider Range="true" [(Vmin)]="minVal16" [(Vmax)]="maxVal16" Min="0" Max="10" showTicks="true" showTicksValues="true"
+      showSelectionBar="true" [selectionBarColor]="fnColor16">
+    </ei-slider>
+  </article>
+
+  <Br />
+  <Hr />
+  <Br />
+
+  <article>
+    <h2>Vertical Range with dynamic selection bar color</h2>
+    <Br />
+    <ei-slider Range="true" vertical="true" [(Vmin)]="minVal16" [(Vmax)]="maxVal16" Min="0" Max="10" showTicks="true" showTicksValues="true"
+      showSelectionBar="true" [selectionBarColor]="fnColor16">
+    </ei-slider>
+  </article>
+
+  <Br />
+  <Hr />
+  <Br />
+
+  <article>
+    <h2>Slider with selection bar gradient</h2>
+    <Br />
+    <ei-slider [(Vmin)]="minVal17" Min="0" Max="10" showTicks="true" showTicksValues="true" showSelectionBar="true" [selectionBarGradient]="barGradiant17">
+    </ei-slider>
+  </article>
+
+  <Br />
+  <Hr />
+  <Br />
+
+  <article>
+    <h2>vertical Slider with selection bar gradient</h2>
+    <Br />
+    <ei-slider vertical="true" [(Vmin)]="minVal17" Min="0" Max="10" showTicks="true" showTicksValues="true" showSelectionBar="true"
+      [selectionBarGradient]="barGradiant17">
+    </ei-slider>
+  </article>
+
+  <Br />
+  <Hr />
+  <Br />
+
+  <article>
+    <h2>Range with dynamic selection bar gradient</h2>
+    <Br />
+    <ei-slider Range="true" [(Vmin)]="minVal16" [(Vmax)]="maxVal16" Min="0" Max="10" showTicks="true" showTicksValues="true"
+      showSelectionBar="true" [selectionBarGradient]="barGradiant17">
+    </ei-slider>
+  </article>
+
+  <Br />
+  <Hr />
+  <Br />
+
+  <article>
+    <h2>Vertical Range with dynamic selection bar gradient</h2>
+    <Br />
+    <ei-slider Range="true" vertical="true" [(Vmin)]="minVal16" [(Vmax)]="maxVal16" Min="0" Max="10" showTicks="true" showTicksValues="true"
+      showSelectionBar="true" [selectionBarGradient]="barGradiant17">
+    </ei-slider>
+  </article>
+
+  <Br />
+  <Hr />
+  <Br />
+
+  <article>
+    <h2>Disabled slider</h2>
+    Model Disabled: <input type="checkbox" [(ngModel)]="disabled18" />
+    <Br />
+    <Br /> Model ReadOnly: <input type="checkbox" [(ngModel)]="readOnly18" />
+    <Br />
+    <ei-slider [(Vmin)]="minVal18" rtl="true" Min="0" Max="10" showTicks="true" showTicksValues="true" showSelectionBar="true"
+      [(disabled)]="disabled18" [(readOnly)]="readOnly18">
+    </ei-slider>
+  </article>
+
+  <Br />
+  <Hr />
+  <Br />
+
+  <article>
+    <h2>Disabled range</h2>
+    Model Disabled: <input type="checkbox" [(ngModel)]="disabled19" />
+    <Br />
+    <Br /> Model ReadOnly: <input type="checkbox" [(ngModel)]="readOnly19" />
+    <Br />
+    <ei-slider Range="true" [(Vmin)]="minVal19" [(Vmax)]="maxVal19" rtl="true" Min="0" Max="10" showTicks="true" showTicksValues="true"
+      showSelectionBar="true" [(disabled)]="disabled19" [(readOnly)]="readOnly19">
+    </ei-slider>
+  </article>
+</div>
