@@ -15,10 +15,10 @@ Navigate to `http://localhost:4200/`.
 ## UI
 
 ### Slider
-![](./CaptureSlider.png)
+![](./CaptureSlider.PNG)
 
 ### Range
-![](./CaptureRange.png)
+![](./CaptureRange.PNG)
 
 ## Thanks
 Many thanks to Valentin Hervieu [https://github.com/angular-slider/angularjs-slider](https://github.com/angular-slider/angularjs-slider)
