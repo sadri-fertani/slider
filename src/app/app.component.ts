@@ -9,6 +9,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 })
 
 export class AppComponent {
+
   complexForm: FormGroup;
   stepsArray: Array<string>;
   fnColor: Function;
@@ -17,7 +18,7 @@ export class AppComponent {
   minVal: number;
   maxVal: number;
 
-  constructor(private fb: FormBuilder) {
+  constructor(public fb: FormBuilder) {
     this.stepsArray = 'SADRI'.split('');
 
     this.fnColor = function (value1) {
@@ -27,10 +28,11 @@ export class AppComponent {
         return 'yellow';
     };
 
-    this.alphaVal = 'X';
+    this.firstName = 'Sadri';
+    this.alphaVal = 'D';
     this.minVal = 2;
     this.maxVal = 8;
-    
+
     this.createForm();
   }
 
