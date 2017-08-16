@@ -10,65 +10,59 @@ import { TickClass, PlacementEnum } from './tick-class';
 
 import { AppComponent } from './app.component';
 import { SimpleChanges } from "@angular/core/src/metadata/lifecycle_hooks";
+import { ComponentFixtureAutoDetect } from "@angular/core/testing";
 
 describe('AppComponent', () => {
 
   let fixture: ComponentFixture<AppComponent>
-  //browser.waitForAngular();
+
   beforeEach(async(() => {
 
     TestBed.configureTestingModule({
       declarations: [AppComponent, SliderComponent, SliderLeftComponent, SliderRightComponent],
       imports: [ReactiveFormsModule, FormsModule],
-      providers: [Utils]
+      providers: [
+        Utils,
+        { provide: ComponentFixtureAutoDetect, useValue: true }
+        ]
     }).compileComponents();
 
     fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
   }));
 
   xit('should create the app', async(() => {
-    fixture.detectChanges();
     expect(fixture.debugElement.componentInstance).toBeDefined();
   }));
 
   xit(`should have a formBuilder`, async(() => {
-    fixture.detectChanges();
     expect(fixture.debugElement.componentInstance.fb instanceof FormBuilder).toBe(true);
   }));
 
   xit('should render title in a h1 tag', async(() => {
-    fixture.detectChanges();
     const compiled = fixture.debugElement.nativeElement;
     expect(compiled.querySelector('h1').textContent).toContain('Angular Slider');
   }));
 
   xit('form invalid when empty', async(() => {
-    fixture.detectChanges();
     expect(fixture.debugElement.componentInstance.complexForm.valid).toBeTruthy();
   }));
 
   xit('firstName field validity', () => {
-    fixture.detectChanges();
     let firstName = fixture.debugElement.componentInstance.complexForm.controls['firstName'];
     expect(firstName.valid).toBeTruthy();
   });
 
   xit('us note field validity', () => {
-    fixture.detectChanges();
     let noteUS = fixture.debugElement.componentInstance.complexForm.controls['currentVal'];
     expect(noteUS.valid).toBeTruthy();
   });
 
   xit('intervalle field validity', () => {
-    fixture.detectChanges();
     let intervalle = fixture.debugElement.componentInstance.complexForm.controls['currentVal2'];
     expect(intervalle.valid).toBeTruthy();
   });
 
   it('should click on button', async(() => {
-    fixture.detectChanges();
-
     spyOn(fixture.debugElement.componentInstance, 'submitForm');
 
     let button = fixture.debugElement.nativeElement.querySelector('button');
@@ -80,8 +74,6 @@ describe('AppComponent', () => {
   }));
 
   it('should test two-way binding by setting value directly on the native element.But that just tests the out-binding', (done) => {
-    fixture.detectChanges();
-
     const app = fixture.debugElement.componentInstance;
     const compiled = fixture.debugElement.nativeElement;
 
